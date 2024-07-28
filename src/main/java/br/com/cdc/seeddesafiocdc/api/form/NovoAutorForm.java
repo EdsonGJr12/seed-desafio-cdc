@@ -5,6 +5,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Total: 1 ponto
+ */
 public class NovoAutorForm {
 	
 	@NotBlank

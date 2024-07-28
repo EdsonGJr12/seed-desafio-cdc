@@ -14,6 +14,9 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/autores")
+/**
+ * Total: 4 pontos
+ */
 public class AutorController {
 	
 	@Autowired
