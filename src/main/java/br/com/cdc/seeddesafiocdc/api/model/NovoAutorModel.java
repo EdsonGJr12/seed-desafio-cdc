@@ -1,4 +1,4 @@
-package br.com.cdc.seeddesafiocdc.api.modal;
+package br.com.cdc.seeddesafiocdc.api.model;
 
 import java.time.LocalDateTime;
 

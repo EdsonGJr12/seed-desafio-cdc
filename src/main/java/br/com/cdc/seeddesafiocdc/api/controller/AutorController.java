@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.cdc.seeddesafiocdc.api.form.NovoAutorForm;
-import br.com.cdc.seeddesafiocdc.api.modal.NovoAutorModel;
+import br.com.cdc.seeddesafiocdc.api.model.NovoAutorModel;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Autor;
 import br.com.cdc.seeddesafiocdc.domain.service.CadastroAutorService;
 import jakarta.validation.Valid;
