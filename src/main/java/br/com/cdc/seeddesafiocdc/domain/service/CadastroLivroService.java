@@ -1,5 +1,6 @@
 package br.com.cdc.seeddesafiocdc.domain.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +53,11 @@ public class CadastroLivroService {
 		return novoLivro;
 	}
 
+	public List<Livro> pesquisar() {
+		return livroRepository.findAll();
+	}
+
+	public Optional<Livro> buscarPorId(Long idLivro) {
+		return livroRepository.findById(idLivro);
+	}
 }

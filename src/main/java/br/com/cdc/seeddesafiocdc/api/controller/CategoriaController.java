@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/categorias")
 /**
- * Total: 4 pontos
+ *  4 pontos
  */
 public class CategoriaController {
 	
