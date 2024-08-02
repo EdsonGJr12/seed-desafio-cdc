@@ -1,11 +1,14 @@
 package br.com.cdc.seeddesafiocdc.api.form;
 
+import br.com.cdc.seeddesafiocdc.api.validation.CodigoCupomDesconto;
 import br.com.cdc.seeddesafiocdc.api.validation.Documento;
 import br.com.cdc.seeddesafiocdc.api.validation.ExistEntity;
+import br.com.cdc.seeddesafiocdc.domain.repository.CupomDescontoRepository;
 import br.com.cdc.seeddesafiocdc.domain.repository.EstadoRepository;
 import br.com.cdc.seeddesafiocdc.domain.repository.LivroRepository;
 import br.com.cdc.seeddesafiocdc.domain.repository.PaisRepository;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Compra;
+import br.com.cdc.seeddesafiocdc.domain.repository.entity.CupomDesconto;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Estado;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Pais;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Pedido;
@@ -16,7 +19,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 /**
- * 5 Pontos, não considerando classes Repository e lambdas como ponto de complexidade
+ * 7 Pontos, não considerando classes Repository e lambdas como ponto de complexidade
  */
 public class RealizarCompraForm {
 
@@ -61,8 +64,11 @@ public class RealizarCompraForm {
 	@NotNull
 	@Valid
 	private PagamentoCarrinhoForm carrinho;
+
+	@CodigoCupomDesconto
+	private String codigoCupom;
 	
-	public Compra toEntity(PaisRepository paisRepository, LivroRepository livroRepository, EstadoRepository estadoRepository) {
+	public Compra toEntity(PaisRepository paisRepository, LivroRepository livroRepository, EstadoRepository estadoRepository, CupomDescontoRepository cupomDescontoRepository) {
 		Pais pais = paisRepository.getReferenceById(this.idPais);
 		Pedido pedido = this.carrinho.toEntity(livroRepository);
 		
@@ -72,7 +78,14 @@ public class RealizarCompraForm {
 		
 		if (this.idEstado != null) {
 			Estado estado = estadoRepository.getReferenceById(this.idEstado);
-			compra.setEstado(estado );
+			compra.setEstado(estado);
+		}
+		
+		if (this.codigoCupom != null) {
+			CupomDesconto cupom = cupomDescontoRepository.findByCodigo(this.codigoCupom)
+					.orElseThrow(() -> new IllegalArgumentException("Cupom não encontrado"));;
+			
+			compra.aplicarCupomDesconto(cupom);
 		}
 		
 		return compra;
@@ -172,5 +185,9 @@ public class RealizarCompraForm {
 
 	public void setCarrinho(PagamentoCarrinhoForm carrinho) {
 		this.carrinho = carrinho;
+	}
+	
+	public void setCodigoCupom(String codigoCupom) {
+		this.codigoCupom = codigoCupom;
 	}
 }

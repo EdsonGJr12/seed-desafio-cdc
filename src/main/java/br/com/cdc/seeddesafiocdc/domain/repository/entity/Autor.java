@@ -26,6 +26,9 @@ public class Autor {
 	private String email;
 
 	private String descricao;
+	
+	@Deprecated
+	public Autor() {}
 
 	public Autor(String nome, String email, String descricao) {
 		this.nome = nome;

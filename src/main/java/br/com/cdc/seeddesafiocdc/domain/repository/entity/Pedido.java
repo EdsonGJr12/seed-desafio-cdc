@@ -27,6 +27,9 @@ public class Pedido {
 	@JoinColumn(name = "id_pedido")
 	private List<PedidoLivro> itens = new ArrayList<>();
 
+	@Deprecated
+	public Pedido() {}
+	
 	public Pedido(List<PedidoLivro> itens, BigDecimal total) {
 		this.total = total;
 		this.itens = itens;

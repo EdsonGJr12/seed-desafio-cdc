@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Autor;
 
+/**
+ * 1 Ponto, não considerando classes Repository e lambdas como ponto de complexidade
+ */
 public class NovoAutorModel {
 
 	private Long id;

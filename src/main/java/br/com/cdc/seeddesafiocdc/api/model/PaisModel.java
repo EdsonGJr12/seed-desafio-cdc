@@ -2,6 +2,9 @@ package br.com.cdc.seeddesafiocdc.api.model;
 
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Pais;
 
+/**
+ * 1 Ponto, não considerando classes Repository e lambdas como ponto de complexidade
+ */
 public class PaisModel {
 	
 	private Long id;

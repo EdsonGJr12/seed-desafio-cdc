@@ -3,6 +3,9 @@ package br.com.cdc.seeddesafiocdc.api.model;
 import br.com.cdc.seeddesafiocdc.domain.constants.StatusCompra;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Compra;
 
+/**
+ * 1 Ponto, não considerando classes Repository e lambdas como ponto de complexidade
+ */
 public class CompraRealizadaModel {
 	private Long id;
 	private StatusCompra status;

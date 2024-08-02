@@ -40,6 +40,9 @@ public class Livro {
 	@ManyToOne
 	@JoinColumn(name = "id_autor")
 	private Autor autor;
+	
+	@Deprecated
+	public Livro() {}
 
 	public Livro(String titulo, String resumo, String sumario, BigDecimal preco, Integer numeroPaginas, String isbn,
 			LocalDate dataPublicacao, Categoria categoria, Autor autor) {
