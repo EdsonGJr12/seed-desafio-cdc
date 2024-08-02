@@ -6,7 +6,12 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
+import br.com.cdc.seeddesafiocdc.api.validation.ExistEntity;
 import br.com.cdc.seeddesafiocdc.api.validation.UniqueValue;
+import br.com.cdc.seeddesafiocdc.domain.repository.AutorRepository;
+import br.com.cdc.seeddesafiocdc.domain.repository.CategoriaRepository;
+import br.com.cdc.seeddesafiocdc.domain.repository.entity.Autor;
+import br.com.cdc.seeddesafiocdc.domain.repository.entity.Categoria;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Livro;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.Min;
@@ -15,6 +20,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+/**
+ * 3 ponto, não considerando classes Repository e lambdas como ponto de complexidade
+ */
 public class NovoLivroForm {
 
 	@NotBlank
@@ -46,10 +54,12 @@ public class NovoLivroForm {
 
 	@NotNull
 	@Positive
+	@ExistEntity(fieldName = "id", classReference = Categoria.class)
 	private Long idCategoria;
 
 	@NotNull
 	@Positive
+	@ExistEntity(fieldName = "id", classReference = Autor.class)
 	private Long idAutor;
 
 	public String getTitulo() {
@@ -122,5 +132,11 @@ public class NovoLivroForm {
 
 	public void setIdAutor(Long idAutor) {
 		this.idAutor = idAutor;
+	}
+
+	public Livro toEntity(CategoriaRepository categoriaRepository, AutorRepository autorRepository) {
+		Categoria categoria = categoriaRepository.getReferenceById(this.idCategoria);
+		Autor autor = autorRepository.getReferenceById(idAutor);
+		return new Livro(titulo, resumo, sumario, preco, numeroPaginas, isbn, dataPublicacao, categoria, autor);
 	}
 }

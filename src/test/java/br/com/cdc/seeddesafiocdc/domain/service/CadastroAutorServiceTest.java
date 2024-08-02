@@ -26,8 +26,7 @@ public class CadastroAutorServiceTest {
 	
 	@Test
 	public void deveRejeitarCasoEmailJaUtilizado() {
-		Autor autor = new Autor();
-		autor.setEmail("edson12.j@hotmail.com");
+		Autor autor = new Autor("Fulano", "edson12.j@hotmail.com", "teste");
 		
 		when(autorRepository.findByEmail(anyString()))
 			.thenReturn(Optional.of(autor));

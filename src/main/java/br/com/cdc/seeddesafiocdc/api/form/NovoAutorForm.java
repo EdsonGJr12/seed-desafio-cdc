@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * Total: 1 ponto
+ * 1 ponto, não considerando classes Repository e lambdas como ponto de complexidade
  */
 public class NovoAutorForm {
 	
@@ -46,10 +46,6 @@ public class NovoAutorForm {
 	}
 	
 	public Autor toEntity() {
-		Autor autor = new Autor();
-		autor.setNome(this.nome);
-		autor.setDescricao(this.descricao);
-		autor.setEmail(this.email);
-		return autor;
+		return new Autor(nome, email, descricao);
 	}
 }

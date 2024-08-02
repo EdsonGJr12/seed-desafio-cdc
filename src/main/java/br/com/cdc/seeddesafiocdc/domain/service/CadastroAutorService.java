@@ -11,7 +11,7 @@ import br.com.cdc.seeddesafiocdc.domain.repository.entity.Autor;
 
 @Service
 /**
- * Total: 3 Pontos
+ * 2 ponto, não considerando classes Repository e lambdas como ponto de complexidade
  */
 public class CadastroAutorService {
 	

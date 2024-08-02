@@ -11,7 +11,9 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import br.com.cdc.seeddesafiocdc.api.form.NovoEstadoForm;
 import br.com.cdc.seeddesafiocdc.api.form.NovoPaisForm;
+import br.com.cdc.seeddesafiocdc.api.model.PaisModel;
 import br.com.cdc.seeddesafiocdc.domain.repository.PaisRepository;
+import br.com.cdc.seeddesafiocdc.domain.repository.entity.Estado;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Pais;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -19,8 +21,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/paises")
 /**
- *  4 pontos
- * 
+ * 5 Pontos, não considerando classes Repository e lambdas como ponto de complexidade
  */
 public class PaisController {
 	
@@ -28,8 +29,10 @@ public class PaisController {
 	private PaisRepository paisRepository;
 
 	@PostMapping
-	public void cadastrar(@RequestBody @Valid NovoPaisForm novoPaisForm) {
-		paisRepository.save(novoPaisForm.toEntity());
+	public PaisModel cadastrar(@RequestBody @Valid NovoPaisForm novoPaisForm) {
+		Pais pais = novoPaisForm.toEntity();
+		paisRepository.save(pais);
+		return new PaisModel(pais);
 	}
 	
 	@PostMapping("/{idPais}/estados")
@@ -37,6 +40,7 @@ public class PaisController {
 	public void cadastrarEstado(@PathVariable Long idPais, @RequestBody @Valid NovoEstadoForm novoEstadoForm) {
 		Pais pais = paisRepository.findById(idPais)
 			.orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-		pais.adicionarEstado(novoEstadoForm.toEntity());
+		Estado estado = novoEstadoForm.toEntity();
+		pais.adicionarEstado(estado);
 	}
 }

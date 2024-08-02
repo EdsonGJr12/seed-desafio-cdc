@@ -1,5 +1,6 @@
 package br.com.cdc.seeddesafiocdc.domain.repository.entity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,41 +14,33 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(schema = "public", name = "tb_pais")
-public class Pais {
-	
+@Table(schema = "public", name = "tb_pedido")
+public class Pedido {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private String nome;
-	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "id_pais")
-	private List<Estado> estados = new ArrayList<>();
 
-	@Deprecated
-	public Pais() {
-		
+	private BigDecimal total;
+
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "id_pedido")
+	private List<PedidoLivro> itens = new ArrayList<>();
+
+	public Pedido(List<PedidoLivro> itens, BigDecimal total) {
+		this.total = total;
+		this.itens = itens;
 	}
-	
-	public Pais(String nome) {
-		this.nome = nome;
-	}
-	
-	public void adicionarEstado(Estado estado) {
-		this.estados.add(estado);
-	}
-	
-	public boolean contemEstado(Estado estado) {
-		return this.estados.contains(estado);
-	}
-	
+
 	public Long getId() {
 		return id;
 	}
-	
-	public String getNome() {
-		return nome;
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public List<PedidoLivro> getItens() {
+		return itens;
 	}
 }

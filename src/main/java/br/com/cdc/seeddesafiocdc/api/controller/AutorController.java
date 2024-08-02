@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/autores")
 /**
- * 4 pontos
+ * 4 Pontos, não considerando classes Repository e lambdas como ponto de complexidade
  */
 public class AutorController {
 	

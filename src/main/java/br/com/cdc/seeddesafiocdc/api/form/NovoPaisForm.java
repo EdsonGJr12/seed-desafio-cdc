@@ -4,6 +4,9 @@ import br.com.cdc.seeddesafiocdc.api.validation.UniqueValue;
 import br.com.cdc.seeddesafiocdc.domain.repository.entity.Pais;
 import jakarta.validation.constraints.NotBlank;
 
+/**
+ * 1 ponto, não considerando classes Repository e lambdas como ponto de complexidade
+ */
 public class NovoPaisForm {
 
 	@NotBlank
